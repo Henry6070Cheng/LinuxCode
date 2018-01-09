@@ -1,0 +1,35 @@
+文件编译
+make_ext4fs -s -l 314572800 -a root -L linux system.img system
+
+授予文件权限
+chmod 755 ifconfig-eth0
+
+编译文件
+arm-none-linux-gnueabi-gcc -o open open.c
+
+查看文件权限
+ls -al /bin/helloworld
+
+格式化命令，超级终端中输入命令：
+– fatformat mmc 0:1
+– ext3format mmc 0:2
+– ext3format mmc 0:3
+– ext3format mmc 0:4
+
+连接命令，超级终端中输入命令：
+– fastboot
+
+烧写命令，在windows命令行输入:
+– 烧写uboot命令（不建议烧写，已经有了）：
+– fastboot.exe flash bootloader u-boot-iTOP-4412.bin
+– 烧写zImage内核命令：
+– fastboot.exe flash kernel zImage
+
+ 输入烧写ramdisk 命令:
+– fastboot.exe flash ramdisk ramdisk-uboot.img
+– 输入烧写system 文件系统命令:
+– fastboot.exe flash system system.img
+– 输入擦除命令：
+– fastboot -w
+– 输入重启开发板命令：
+– fastboot reboot
